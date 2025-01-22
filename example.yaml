@@ -1,0 +1,8 @@
+pods:
+  - pod_name: '01'
+    pod_ip: '1'
+  - pod_name: '02'
+    pod_ip: '2'
+  - pod_name: '03'
+    pod_ip: '3'
+  # Add more POD details as needed
