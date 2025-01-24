@@ -29,6 +29,8 @@ def process_and_copy_files(env, src_dir, dest_dir, pod_name, pod_ip):
 
         for root, dirs, files in os.walk(src_dir):
             dirs[:] = [d for d in dirs if not d.startswith('POD') or not d[3:].isdigit()]
+            # Ignore other folders in this case img folder
+            dirs[:] = [d for d in dirs if d != 'img']
 
             rel_root = os.path.relpath(root, src_dir)
             dest_root = os.path.join(dest_dir, rel_root)
