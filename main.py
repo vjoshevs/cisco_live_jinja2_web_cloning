@@ -85,7 +85,7 @@ def create_pod_navigation(lab_nav, pod_number):
         else:
             return nav_item
     
-    pod_prefix = f"POD{pod_number}"
+    pod_prefix = f"pod{pod_number}"
     return prefix_paths(lab_nav, pod_prefix)
 
 def generate_mkdocs_nav(pod_details, mkdocs_config, base_output_dir, original_mkdocs_file):
@@ -112,7 +112,7 @@ def generate_mkdocs_nav(pod_details, mkdocs_config, base_output_dir, original_mk
         pod_nav = create_pod_navigation(lab_nav_structure, i)
         
         if pod_nav:
-            pod_section = {f"POD{pod_name}": pod_nav}
+            pod_section = {f"pod{pod_name}": pod_nav}
             new_nav.append(pod_section)
     
     # Read original mkdocs.yml content and replace nav section
@@ -182,7 +182,7 @@ def process_and_copy_files(env, src_dir, dest_dir, pod_name, pod_ip):
         print(f"Created directory: {dest_dir}")
 
         for root, dirs, files in os.walk(src_dir):
-            dirs[:] = [d for d in dirs if not d.startswith('POD') or not d[3:].isdigit()]
+            dirs[:] = [d for d in dirs if not d.startswith('pod') or not d[3:].isdigit()]
             # Ignore other folders in this case img folder
             dirs[:] = [d for d in dirs if d != 'img']
 
@@ -222,7 +222,7 @@ def main():
 
     # Process POD directories
     for i, pod_detail in enumerate(pod_details, start=1):
-        pod_dir = os.path.join(base_output_dir, f'POD{i}')
+        pod_dir = os.path.join(base_output_dir, f'pod{i}')
         process_and_copy_files(env, source_dir, pod_dir, pod_detail['pod_name'], pod_detail['pod_ip'])
 
     # Generate mkdocs.yml with per-POD navigation
